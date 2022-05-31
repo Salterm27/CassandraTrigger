@@ -1,0 +1,16 @@
+:StartCassandra
+docker pull cassandra:latest
+docker network create cassandra
+docker run --rm -d --name cassandra --hostname cassandra --network cassandra cassandra
+EXIT /B 0
+
+
+:Run_CQL
+docker run --rm -it --network cassandra nuvo/docker-cqlsh cqlsh cassandra 9042 --cqlversion='3.4.5'
+EXIT /B 0
+
+
+:KillCassandra
+docker kill cassandra
+docker network rm cassandra
+EXIT /B 0
